@@ -9,3 +9,6 @@ Feature: To prototype a test automation with cucumber java using feature file 1
 
   Scenario: Test Case 1.3
     Given Tester logs on to the "31" "32" system
+
+  Scenario: Test Case 1.4
+    Given Tester logs on to the "41" "42" system
