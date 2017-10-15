@@ -5,7 +5,7 @@ pipeline {
         stage ('Compile Stage') {
             steps {
                 withMaven(maven : 'Maven_3.5.0') {
-                    echo 'compile stage'
+                    echo '[INFO]: compile stage'
                 }
             }
         }
@@ -13,7 +13,7 @@ pipeline {
         stage ('Testing Stage') {
             steps {
                 withMaven(maven : 'Maven_3.5.0') {
-                    echo 'testing stage '
+                    echo '[INFO]: testing stage '
                 }
             }
         }
@@ -21,7 +21,7 @@ pipeline {
         stage ('Deployment Stage') {
             steps {
                 withMaven(maven : 'Maven_3.5.0') {
-                    echo 'deployment stage'
+                    echo '[INFO]: deployment stage'
                 }
             }
         }
@@ -29,20 +29,20 @@ pipeline {
 
     post {
         always {
-            echo 'This will always run'
+            echo '[INFO]: This will always run'
         }
         success {
-            echo 'This will run only if successful'
+            echo '[INFO]: This will run only if successful'
         }
         failure {
-            echo 'This will run only if failed'
+            echo '[INFO]: This will run only if failed'
         }
         unstable {
-        echo 'This will run only if the run was marked as unstable'
+        echo '[INFO]: This will run only if the run was marked as unstable'
         }
         changed {
-            echo 'This will run only if the state of the Pipeline has changed'
-            echo 'For example, if the Pipeline was previously failing but is now successful'
+            echo '[INFO]: This will run only if the state of the Pipeline has changed'
+            echo '[INFO]: For example, if the Pipeline was previously failing but is now successful'
         }
     }
 }
