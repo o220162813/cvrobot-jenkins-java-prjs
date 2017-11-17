@@ -15,7 +15,7 @@ public class StepDefinition {
         System.out.println(varargin1);
         System.out.println(varargin2);
 
-        if(varargin1.equalsIgnoreCase("21")) {
+        if(varargin1.contains("21")) {
             Assert.fail();
         }
 
