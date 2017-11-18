@@ -1,3 +1,0 @@
-@echo off
-echo Compiling all modules within mymultiprjs ....
-mvn clean install -f ./myprj-build
