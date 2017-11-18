@@ -1,0 +1,2 @@
+Command to Build:
+mvn clean install exec:java

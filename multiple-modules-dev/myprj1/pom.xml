@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.cvRobot</groupId>
+    <artifactId>myprj1</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>jar</packaging>
+
+    <!--Developer Declaration-->
+    <organization>
+        <name>cvRobot</name>
+    </organization>
+    <developers>
+        <developer>
+            <id>cvRobot.slin</id>
+            <name>Stephen Ching-Feng Lin</name>
+            <email>cstephenlin@gmail.com</email>
+        </developer>
+    </developers>
+
+    <!--declare properties-->
+    <properties>
+        <!--declare dependency versions-->
+        <myprj2.version>1.0-SNAPSHOT</myprj2.version>
+        <cucumber-java.version>1.2.5</cucumber-java.version>
+        <cucumber-testng.version>1.2.5</cucumber-testng.version>
+
+        <!--declare plugin versions-->
+        <maven-compiler-plugin.verison>3.6.0</maven-compiler-plugin.verison>
+        <maven-compiler-plugin.source>1.8</maven-compiler-plugin.source>
+        <maven-compiler-plugin.target>1.8</maven-compiler-plugin.target>
+        <maven-surefire-plugin.version>2.20</maven-surefire-plugin.version>
+        <maven-cucumber-reporting.version>3.8.0</maven-cucumber-reporting.version>
+    </properties>
+
+    <!--define dependencies-->
+    <dependencies>
+        <dependency>
+            <groupId>com.cvRobot</groupId>
+            <artifactId>myprj2</artifactId>
+            <version>${myprj2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-java</artifactId>
+            <version>${cucumber-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>info.cukes</groupId>
+            <artifactId>cucumber-testng</artifactId>
+            <version>${cucumber-testng.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!--use a new maven compiler-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>${maven-compiler-plugin.verison}</version>
+                <configuration>
+                    <source>${maven-compiler-plugin.source}</source>
+                    <target>${maven-compiler-plugin.target}</target>
+                </configuration>
+            </plugin>
+
+            <!--perform test cases in parallel-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <suiteXmlFiles>
+                        <suiteXmlFile>testng.xml</suiteXmlFile>
+                    </suiteXmlFiles>
+                    <reuseForks>false</reuseForks>
+                    <argLine>-Duser.language=en</argLine>
+                    <argLine>-Xmx1024m</argLine>
+                    <argLine>-XX:MaxPermSize=256m</argLine>
+                    <argLine>-Dfile.encoding=UTF-8</argLine>
+                    <useFile>false</useFile>
+                    <testFailureIgnore>true</testFailureIgnore>
+                </configuration>
+                <executions>
+                    <execution>
+                        <phase>integration-test</phase>
+                        <goals>
+                            <goal>test</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!--generate pretty report-->
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>${maven-cucumber-reporting.version}</version>
+                <executions>
+                    <execution>
+                        <id>execution</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>jvm-selenium-testng-cvRobot</projectName>
+                            <buildNumber>-1</buildNumber>
+                            <cucumberOutput>${project.build.directory}/cvRobot-RawJsonResult/report1.json</cucumberOutput>
+                            <outputDirectory>${project.build.directory}/cvRobot Maven Pretty Local Report</outputDirectory>
+                            <parallelTesting>false</parallelTesting>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>
